@@ -10,7 +10,8 @@ class Videojuego:
         FROM `videojuegos`
         INNER JOIN `videojuegoimagenes` ON `videojuegos`.`idvideojuego` = `videojuegoimagenes`.`idvideojuego`
         LEFT JOIN `imagenes` ON `videojuegoimagenes`.`idimagen` = `imagenes`.`idimagen`
-        LIMIT 6
+        ORDER BY nomvideojuego ASC
+        LIMIT 6        
         """
         
         conexion = conexion_db()

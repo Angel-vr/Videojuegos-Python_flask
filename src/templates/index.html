@@ -1,16 +1,119 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Videojuegos</title>
-</head>
-<body>
-    <h1>Lista de Videojuegos</h1>
-    <ul>
-        {% for videojuego in videojuegos %}
-            <li>{{ videojuego.nomvideojuego }} - {{ videojuego['precio'] }}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends './layout.html' %}
+
+{% block header %}
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block main %}
+<ul>
+    {% for videojuego in videojuegos %}
+        <li>{{ videojuego.nomvideojuego }} - {{ videojuego['precio'] }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block footer %}
+<footer class="bg-dark text-light pt-5 pb-4">
+    <div class="container text-center text-md-left">
+        <div class="row text-center text-md-left">
+            <!-- Sección de Información -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold">DeJaVu Games</h5>
+                <p>
+                    DeJaVu Games es tu destino para descubrir los mejores videojuegos, noticias, y reseñas de la industria. ¡Explora nuestros contenidos y únete a la comunidad!
+                </p>
+            </div>
+            <!-- Sección de Enlaces -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold">Productos</h5>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Juegos</a>
+                </p>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Accesorios</a>
+                </p>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Consolas</a>
+                </p>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Merchandising</a>
+                </p>
+            </div>
+            <!-- Sección de Enlaces Útiles -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold">Enlaces útiles</h5>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Tu cuenta</a>
+                </p>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Afiliados</a>
+                </p>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Soporte</a>
+                </p>
+                <p>
+                    <a href="#" class="text-light text-decoration-none">Términos y Condiciones</a>
+                </p>
+            </div>
+            <!-- Sección de Redes Sociales -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 font-weight-bold">Contacto</h5>
+                <p><i class="fas fa-home mr-3"></i> Madrid, España, 27777</p>
+                <p><i class="fas fa-envelope mr-3"></i> info@dejavugames.com</p>
+                <p><i class="fas fa-phone mr-3"></i> 696 697 698</p>
+                <p><i class="fas fa-print mr-3"></i> 696 697 698</p>
+            </div>
+        </div>
+        <!-- Línea divisoria -->
+        <hr class="mb-4">
+        <!-- Sección de Copyright -->
+        <div class="row align-items-center">
+            <div class="col-md-7 col-lg-8">
+                <p class="text-center text-md-left">
+                    © 2024 GameZone - Todos los derechos reservados.
+                </p>
+            </div>
+            <div class="col-md-5 col-lg-4">
+                <div class="text-center text-md-right">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                            <a href="#" class="btn btn-outline-light btn-floating text-light"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="btn btn-outline-light btn-floating text-light"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="btn btn-outline-light btn-floating text-light"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="btn btn-outline-light btn-floating text-light"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Enlaces de FontAwesome para iconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+{% endblock %}
