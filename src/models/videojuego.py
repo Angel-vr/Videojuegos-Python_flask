@@ -18,8 +18,9 @@ class Videojuego:
             print("No se pudo establecer conexión a la base de datos.")
             return []  # Retorna una lista vacía si no hay conexión
         print("\nAccediendo a datos.")
+        
         try:
-            cursor = conexion.cursor()
+            cursor = conexion.cursor(dictionary=True)
             cursor.execute(sql)
             videojuegos = cursor.fetchall()
         except Exception as e:

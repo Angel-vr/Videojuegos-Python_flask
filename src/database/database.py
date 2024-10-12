@@ -18,3 +18,7 @@ def conexion_db():
     except Error as ex:
         print("Error conexion:" , ex)
         return
+    
+
+    
+    
