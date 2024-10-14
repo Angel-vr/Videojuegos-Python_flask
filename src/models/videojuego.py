@@ -10,7 +10,7 @@ class Videojuego:
         FROM `videojuegos`
         INNER JOIN `videojuegoimagenes` ON `videojuegos`.`idvideojuego` = `videojuegoimagenes`.`idvideojuego`
         LEFT JOIN `imagenes` ON `videojuegoimagenes`.`idimagen` = `imagenes`.`idimagen`
-        ORDER BY nomvideojuego ASC
+        WHERE `videojuegos`.`idvideojuego` BETWEEN 1 AND 6
         LIMIT 6        
         """
         
