@@ -90,6 +90,10 @@ class Videojuego:
             videojuegos, total_items = Videojuego.obtener_videojuegos(offset=offset, limit=per_page)
         
         # Crea la paginación usando el total de elementos y la configuración actual
+<<<<<<< HEAD
         pagination = Pagination(page=page, total=total_items, per_page=per_page, css_framework='bootstrap5')
+=======
+        pagination = Pagination(page=page, total=total_items, per_page=per_page)
+>>>>>>> a493f0b (base login)
         
         return videojuegos, pagination, query
