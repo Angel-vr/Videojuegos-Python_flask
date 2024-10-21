@@ -7,10 +7,8 @@ videojuego_bp = Blueprint('videojuegos', __name__)
 def index():
     videojuegos, pagination, query = Videojuego.obtener_videojuegos_paginados(request)
     return render_template('index.html', videojuegos=videojuegos, pagination=pagination, query=query)
-<<<<<<< HEAD
-=======
 
 @videojuego_bp.route('/login', methods=['GET'])
 def login():
     return render_template('login.html')
->>>>>>> a493f0b (base login)
+

@@ -6,9 +6,14 @@
 #     print("Error al conectar db",e)
 
 
-from src.models.videojuego import Videojuego
+# from src.models.videojuego import Videojuego
 
-videojuegos = Videojuego.obtener_videojuegos()
-print("Videojuegos en la base de datos:\n")
-for juego in videojuegos:
-    print(juego)
+# videojuegos = Videojuego.obtener_videojuegos()
+# print("Videojuegos en la base de datos:\n")
+# for juego in videojuegos:
+#     print(juego)
+
+# import secrets
+
+# secret_key = secrets.token_urlsafe(20)
+# print(secret_key)

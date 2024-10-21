@@ -30,7 +30,7 @@ class Videojuego:
             
         except Exception as e:
             print(f"Error al ejecutar la consulta: {e}")
-            return []  # Retorna una lista vacía en caso de error
+            return [] # Retorna una lista vacía en caso de error
         finally:
             cursor.close()
             conexion.close()
@@ -88,12 +88,8 @@ class Videojuego:
         else:
             # Si no hay búsqueda, llama a la función original obtener_videojuegos
             videojuegos, total_items = Videojuego.obtener_videojuegos(offset=offset, limit=per_page)
-        
+
         # Crea la paginación usando el total de elementos y la configuración actual
-<<<<<<< HEAD
-        pagination = Pagination(page=page, total=total_items, per_page=per_page, css_framework='bootstrap5')
-=======
         pagination = Pagination(page=page, total=total_items, per_page=per_page)
->>>>>>> a493f0b (base login)
         
         return videojuegos, pagination, query
