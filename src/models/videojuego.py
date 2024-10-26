@@ -93,3 +93,36 @@ class Videojuego:
         pagination = Pagination(page=page, total=total_items, per_page=per_page)
         
         return videojuegos, pagination, query
+
+
+from werkzeug.security import check_password_hash
+
+class User():
+    
+        def __init__(self, id, nomusuario, dni, email, password) -> None:
+            self.id=id
+            self.nomusuario=nomusuario
+            self.dni=dni
+            self.email=email
+            self.password=password
+            
+        @classmethod    
+        def check_password(self, hashed_password, password):
+            return check_password_hash(hashed_password, password)
+        
+# print(generate_password_hash("prueba"))
+
+class ModelUser():
+    def login(self, user):
+        try:
+            conexion=conexion_db()
+            if conexion is None:
+                print("No se pudo establecer conexión a la base de datos.")
+                return []  # Retorna una lista vacía si no hay conexión
+            print("\nAccediendo a datos.")
+            sql="""
+                SELECT idusuario, nomusuario, dni, email, password FROM usuarios 
+                WHERE email = '{}'""".format(user.email)
+            
+        except Exception as es:
+            raise Exception(ex)
