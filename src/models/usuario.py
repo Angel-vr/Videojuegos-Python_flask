@@ -1,23 +1,3 @@
-# from src.database.database import conexion_db
-
-# try:
-#     conexion = conexion_db()
-# except Exception as e:
-#     print("Error al conectar db",e)
-
-
-# from src.models.videojuego import Videojuego
-
-# videojuegos = Videojuego.obtener_videojuegos()
-# print("Videojuegos en la base de datos:\n")
-# for juego in videojuegos:
-#     print(juego)
-
-# import secrets
-
-# secret_key = secrets.token_urlsafe(20)
-# print(secret_key)
-
 from src.database.database import conexion_db
 from werkzeug.security import check_password_hash
 
@@ -66,11 +46,11 @@ class ModelUser:
             print(f"Error: {ex}")
             return None
         
-user_to_test = User(idusuario=None, nomusuario=None, dni=None, email='a@a.com', password='prueba')
+# user_to_test = User(idusuario=None, nomusuario=None, dni=None, email='a@a.com', password='prueba')
 
-logged_user = ModelUser.login(user_to_test)
+# logged_user = ModelUser.login(user_to_test)
 
-if logged_user:
-    print(f'Usuario logueado: {logged_user.nomusuario}, {logged_user.email}')
-else:
-    print('login fallido')
+# if logged_user:
+#     print(f'Usuario logueado: {logged_user.nomusuario}')
+# else:
+#     print('login fallido')

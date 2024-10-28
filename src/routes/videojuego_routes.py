@@ -8,7 +8,12 @@ def index():
     videojuegos, pagination, query = Videojuego.obtener_videojuegos_paginados(request)
     return render_template('index.html', videojuegos=videojuegos, pagination=pagination, query=query)
 
-@videojuego_bp.route('/login', methods=['GET'])
+@videojuego_bp.route('/login', methods=['GET', 'POST'])
 def login():
-        return render_template('login.html')
+        if request.method=='POST':
+            print(request.form['email'])
+            print(request.form['password'])
+            return render_template('login.html')
+        else:    
+            return render_template('login.html')
 

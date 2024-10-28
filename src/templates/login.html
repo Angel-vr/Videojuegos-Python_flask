@@ -1,10 +1,8 @@
 {% extends './layout.html' %}
 
 {% block customCSS %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css')}}" >
+<link rel="stylesheet" href="{{ url_for('static', filename='css/signin.css') }}">
 {% endblock %}
-
-
 
 {% block body %}
 
@@ -36,30 +34,30 @@
 {% endblock %}
 
 {% block main %}
-<main class="form-signin text-center" action="/login" methods="POST">
-    <form>
-      <img class="mb-4" src={{ url_for('static', filename='images/pngegg.png')}} alt="" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-  
-      <div class="form-floating">
-        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-        <label for="email">Email address</label>
-      </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-        <label for="password">Password</label>
-      </div>
-  
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-    </form>
-  </main>
-  {% endblock %}
+<main class="form-signin text-center">
+    <form method="POST" action="{{ url_for('videojuegos.login') }}">
 
+        <img class="mb-4" src="{{ url_for('static', filename='images/pngegg.png') }}" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    
+        <div class="form-floating">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            <label for="email">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <label for="password">Password</label>
+        </div>
+    
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+    </form>
+</main>
+{% endblock %}
 
 {% endblock %}
