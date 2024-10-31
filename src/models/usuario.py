@@ -1,8 +1,8 @@
 from src.database.database import conexion_db
 from werkzeug.security import check_password_hash
+from flask_login import UserMixin
 
-
-class User:
+class User(UserMixin):
     
     def __init__(self, idusuario, nomusuario, dni, email, password) -> None:
         self.idusuario= idusuario
@@ -10,6 +10,10 @@ class User:
         self.dni=dni
         self.email=email
         self.password=password
+    
+    def get_id(self):
+        return str(self.idusuario)  # Devuelve el ID como cadena
+
      
     @classmethod    
     def check_password(cls,hashed_password, password):
@@ -45,6 +49,51 @@ class ModelUser:
         except Exception as ex:
             print(f"Error: {ex}")
             return None
+
+
+
+    @classmethod
+    def get_by_id(cls, user_id):
+        sql = """
+        SELECT idusuario, nomusuario, email, password
+        FROM usuarios
+        WHERE idusuario = %s"""
+        
+        conexion = conexion_db()
+        if conexion is None:
+            print("No se pudo establecer conexión a la base de datos.")
+            return None  # Retorna None si no hay conexión
+
+        try:
+            cursor = conexion.cursor(dictionary=True)
+            cursor.execute(sql, (user_id,))
+            row = cursor.fetchone()
+            if row is not None:
+                # Devuelve un objeto User con la información
+                return User(row['idusuario'], row['nomusuario'], None, row['email'], row['password'])
+            return None
+        except Exception as ex:
+            print(f"Error: {ex}")
+            return None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
 # user_to_test = User(idusuario=None, nomusuario=None, dni=None, email='a@a.com', password='prueba')
 

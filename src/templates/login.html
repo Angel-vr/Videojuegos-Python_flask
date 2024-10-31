@@ -38,6 +38,20 @@
     <form method="POST" action="{{ url_for('videojuegos.login') }}">
 
         <img class="mb-4" src="{{ url_for('static', filename='images/pngegg.png') }}" alt="" width="72" height="57">
+
+        <!-- Código para mostrar los mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <br />
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     
         <div class="form-floating">
