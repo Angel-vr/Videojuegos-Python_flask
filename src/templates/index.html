@@ -3,7 +3,7 @@
 {% block header %}
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">DeJaVu GaMeS</a>
+        <a class="navbar-brand" href="/">DeJaVu GaMeS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,17 +18,21 @@
             {% if current_user.is_authenticated %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <h4 class="text-success">Bienvenido, {{ current_user.nomusuario }}</h4 class="text-info">
+                    <h4 class="text-success">Bienvenido, {{ current_user.nomusuario }}</h4>
                 </li>
             </ul>
             <a href="/logout" class="btn btn-outline-danger me-3">
-                <i class="bi bi-box-arrow-left"> Cerrar sesión</i>
+                <i class="bi bi-box-arrow-left"></i>
             </a>
             
             {% else %}
-            <a href="/login" class="btn btn-outline-success me-3">
-                <i class="bi bi-person-circle"> Iniciar sesión</i>
-            </a>
+            
+
+            <div class="btn-group me-3">
+                <a href="/login" class="btn btn-primary active" aria-current="page">Inicia sesión</a>
+                <a href="/create" class="btn btn-primary">Registrarse</a>                
+            </div>
+
             {% endif %}
 
             <form class="d-flex" role="search" method="GET" action="/">
@@ -167,3 +171,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 {% endblock %}
+
+

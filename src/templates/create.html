@@ -35,7 +35,7 @@
 
 {% block main %}
 <main class="form-signin text-center">
-    <form method="POST" action="{{ url_for('videojuegos.login') }}">
+    <form method="POST" action="{{ url_for('videojuegos.create') }}">
 
         <img class="mb-4" src="{{ url_for('static', filename='images/pngegg.png') }}" alt="" width="72" height="57">
 
@@ -49,26 +49,47 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 {% endfor %}
+
+                <div class="alert alert-info" role="alert" id="redirect-message" style="display: none;">
+                    Redirigiendo a inicio de sesión...
+                </div>
+        
+                <script>
+
+                    document.getElementById('redirect-message').style.display = 'block';
+                    // Redirige a la página de inicio de sesión después de 3 segundos
+                    setTimeout(function() {
+                        window.location.href = "{{ url_for('videojuegos.login') }}";
+                    }, 3000);
+                </script>
             {% endif %}
         {% endwith %}
 
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-    
-        <div class="form-floating">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="">
-            <label for="email">Email address</label>
+        <h1 class="h3 mb-3 fw-normal">Resistro de usuario</h1>
+        
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nomusuario" name="nomusuario" placeholder="Nombre de Usuario" required>
+            <label for="nomusuario">Nombre de Usuario</label>
         </div>
-        <div class="form-floating">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="">
-            <label for="password">Password</label>
+        
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI" required>
+            <label for="dni">DNI</label>
         </div>
-    
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+        
+        
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electrónico" required>
+            <label for="email">Correo Electrónico</label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+            <label for="password">Contraseña</label>
+        </div>
+
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Registrarse</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
     </form>
 </main>

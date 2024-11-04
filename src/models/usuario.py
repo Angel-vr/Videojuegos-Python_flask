@@ -76,9 +76,42 @@ class ModelUser:
             print(f"Error: {ex}")
             return None
 
+    @classmethod
+    def create(cls, user):
+        sql = """
+        INSERT INTO usuarios (nomusuario, dni, email, password)
+        VALUES (%s, %s, %s, %s)"""
+            
+        conexion = conexion_db()
+        if conexion is None:
+            print("No se pudo establecer conexión a la base de datos.")
+            return None  # Retorna None si no hay conexión
+        
+        try:
+            cursor = conexion.cursor(dictionary=True)
+            cursor.execute(sql, (user.nomusuario, user.dni, user.email, user.password))
+            conexion.commit()
+            return True
+        except Exception as ex:
+            print(f"Error al registrar usuario: {ex}")
+            return False
 
+            
 
-
+    @classmethod
+    def check_user_exists(cls, email, dni, nomusuario):
+        sql="""
+        SELECT 1 FROM usuarios
+        WHERE email = %s OR dni = %s OR nomusuario = %s
+        """
+        conexion = conexion_db()
+        if conexion is None:
+            print("No se pudo establecer conexión a la base de datos.")
+            return False
+        cursor = conexion.cursor()
+        cursor.execute(sql, (email, dni, nomusuario))
+        result = cursor.fetchone()
+        return bool(result)
 
 
 
