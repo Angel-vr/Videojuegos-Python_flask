@@ -96,6 +96,42 @@ class Videojuego:
         return videojuegos, pagination, query
     
     
+
+    @staticmethod
+    def obtener_videojuego_por_id(videojuego_id):
+        """Obtiene un videojuego específico por su ID de la base de datos."""
+        sql = """
+        SELECT `idvideojuego`, `nomvideojuego`, `precio`
+        FROM `videojuegos`
+        WHERE `idvideojuego` = %s
+        """
+        conexion = conexion_db()
+        if conexion is None:
+            print("No se pudo establecer conexión a la base de datos.")
+            return None
+        
+        try:
+            cursor = conexion.cursor(dictionary=True)
+            cursor.execute(sql, (videojuego_id,))
+            videojuego = cursor.fetchone()  # Devuelve el primer resultado si existe
+            
+            if videojuego:
+                # Asegúrate de que 'precio' sea un número serializable (float)
+                videojuego['precio'] = float(videojuego['precio'])
+
+
+            
+        except Exception as e:
+            print(f"Error al obtener el videojuego: {e}")
+            return None
+        finally:
+            cursor.close()
+            conexion.close()
+
+        return videojuego
+
+
+    
     
 
 

@@ -1,8 +1,11 @@
 {% extends './layout.html' %}
 
+
+
 {% block header %}
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-light ">
     <div class="container-fluid">
+        <i class="bi bi-controller text-neon me-2" style="font-size: 1.5em;"></i>
         <a class="navbar-brand" href="/">DeJaVu GaMeS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,10 +20,21 @@
 
             {% if current_user.is_authenticated %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <h4 class="text-success">Bienvenido, {{ current_user.nomusuario }}</h4>
+                <li class="nav-item d-flex align-items-center">
+                    <!-- Ícono de controlador de videojuegos en estilo neón -->
+                    
+            
+                    <!-- Mensaje de bienvenida en estilo neón -->
+                    <h3 class="neon-text">
+                        ¡Bienvenido, <span class="neon-username">{{ current_user.nomusuario }}</span>!
+                    </h3>
                 </li>
             </ul>
+            
+            <a href="#" class="btn btn-outline-success me-3">
+                <i class="bi bi-cart4"></i>
+            </a>
+
             <a href="/logout" class="btn btn-outline-danger me-3">
                 <i class="bi bi-box-arrow-left"></i>
             </a>
@@ -56,7 +70,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ videojuego.nomvideojuego }}</h5>
                         <p class="card-price">{{ videojuego.precio }} €</p>
-                        <a href="#" class="btn btn-primary">Ver detalles</a>
+                        <a href="{{ url_for('videojuegos.add_to_cart', videojuego_id=videojuego.idvideojuego)}}" class="btn btn-primary">Añadir al carrito</a>
                     </div>
                 </div>
             </div>
@@ -72,10 +86,112 @@
     </div>
     <div class="d-flex justify-content-center">
         {{ pagination.links }}
-    </div>
+    </div>    
 </div>
 
 
+<!-- Sidebar para el carrito -->
+<div id="sidebarCart" class="sidebar d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeCart()">&times;</a>
+    <h2>Tu Carrito</h2>
+    {% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    {% if cart %}
+    <ul>
+        {% for id, item in cart.items() %}
+            <li>{{ item['nombre'] }} - ${{ item['precio'] }} x {{ item['quantity'] }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Total: {{ total }} € </h3>
+    <a href="{{ url_for('videojuegos.clear_cart') }}">Vaciar Carrito</a>
+    {% else %}
+        <p>El carrito está vacío</p>
+    {% endif %}    
+</div>
+
+<!-- Botón para abrir el carrito -->
+<button onclick="openCart()" class="open-cart-btn btn">
+    Ver Carrito
+    {% if total_quantity > 0 %}
+        <span class="cart-count">{{ total_quantity }}</span>
+
+    {% endif %}
+</button>
+
+<!-- Estilos del sidebar -->
+<style>
+    .sidebar {
+        height: 51%;
+        width: 0;
+        position: fixed;
+        top: 66px;
+        right: -32px;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+        color: white;
+    }
+    .sidebar a {
+        color: white;
+        display: block;
+        text-decoration: none;
+        padding: 10px;
+        text-align: center;
+    }
+    .open-cart-btn {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        background-color: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .open-cart-btn .cart-count {
+        position: absolute;
+        top: -5px;
+        right: -5px;  /* Mueve la burbuja hacia la esquina superior derecha */
+        width: 20px;
+        height: 20px;
+        background-color: #007bff; /* Color de la burbuja */
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 50%;  /* Hace que la burbuja sea redonda */
+        line-height: 20px;  /* Alinea el número en el centro de la burbuja */
+        display: inline-block;
+        min-width: 20px; /* Asegura que el número se vea bien aunque sea de un solo dígito */
+    }
+    
+    /* Agrega un pequeño triángulo para darle estilo al contador */
+    .open-cart-btn .cart-count::after {
+        content: ''; /* Un pequeño triángulo */
+        position: absolute;
+        top: 100%;
+        right: 50%;
+        margin-right: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #007bff transparent transparent transparent; /* Triángulo rojo */
+    }
+
+    
+</style>
+
+<!-- JavaScript para abrir y cerrar el sidebar -->
+<script>
+    function openCart() {
+        document.getElementById("sidebarCart").style.width = "320px";
+    }
+    function closeCart() {
+        document.getElementById("sidebarCart").style.width = "0";
+    }
+</script>
 
 {% endblock %}
 
@@ -171,5 +287,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 {% endblock %}
+
+
 
 
